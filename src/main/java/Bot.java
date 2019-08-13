@@ -3,7 +3,7 @@ import static java.lang.Math.random;
 
 public class Bot {
     double score[][];
-    double genes[][];
+    Network network;
 
     /*
 

@@ -10,8 +10,19 @@ public class Calculs {
                 }
             }
         }
-
         return C;
+    }
+
+    public static double[][] matrixAdd(double A[][], double B[][]) {
+        double y[][] = new double[A.length][A[0].length];
+
+        for(int i=0;i<A.length;i++){
+            for(int j=0;j<A[0].length;j++) {
+                y[i][j] = A[i][j] + B[i][j];
+            }
+        }
+
+        return y;
     }
 
 }

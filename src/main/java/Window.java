@@ -22,6 +22,13 @@ public class Window {
     private int windowWidth;
     private int windowHeight;
 
+
+    /**
+     * Constructor
+     * @param primaryStage
+     * @param windowWidth
+     * @param windowHeight
+     */
     Window(Stage primaryStage, int windowWidth, int windowHeight) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;

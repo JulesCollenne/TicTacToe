@@ -13,7 +13,7 @@ public class Bot {
      */
 
     public Bot(){
-        score = new double[100000000][9];
+        network = new Network(3);
     }
 
 

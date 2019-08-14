@@ -23,6 +23,7 @@ public class TestWindow extends Application {
             board[7] = 2;
 
             window.initialize();
+            window.newGame();
             window.drawPieces(board);
         }
 

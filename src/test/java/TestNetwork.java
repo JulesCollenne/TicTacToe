@@ -18,6 +18,8 @@ public class TestNetwork extends Application {
         for(int i = 0;  i < network.nbLayer; i++){
             network.layers[i].w0[0][0] = 2;
         }
+
+
     }
 
 }

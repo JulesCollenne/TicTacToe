@@ -16,13 +16,16 @@ public class Run extends Application {
         int trainIter = 100;
 
         Window window = new Window(primaryStage,500,400);
+        Game game = new Game(window);
 
         window.initialize();
 
         for(int i=0;i<trainIter;i++) {
-            window.newGame();
+
 
         }
+
+
 
 
     }

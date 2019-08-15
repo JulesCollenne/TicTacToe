@@ -1,8 +1,5 @@
-import static java.lang.Math.pow;
-import static java.lang.Math.random;
-
-public class Bot {
-    Network network;
+class Bot {
+    private Network network;
 
     /*
 
@@ -11,14 +8,17 @@ public class Bot {
              7 | 8 | 9
      */
 
-    public Bot(){
+    Bot(){
         network = new Network(3);
     }
 
 
-    public int play(){
+    void play(){
 
         //TODO
-        return 0;
+    }
+
+    void won(){
+
     }
 }

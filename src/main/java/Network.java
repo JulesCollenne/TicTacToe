@@ -11,7 +11,7 @@ public class Network {
 
      **/
 
-    public Network(int nbLayer){
+    Network(int nbLayer){
         this.nbLayer = nbLayer;
         this.layers = new Layer[nbLayer];
         this.inputSize = 9;
@@ -29,7 +29,7 @@ public class Network {
 
     /**
      * Compute output of the network depending on input
-     * @param input
+     * @param input entrée
      * @return output
      */
 

@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Layer {
+class Layer {
     double[][] input;
     double[][] w0;
     double[][] b0;
@@ -24,7 +24,7 @@ public class Layer {
                 b0[i][j] = rand.nextDouble();
     }
 
-    public double[][] compute(double[][] input){
+    double[][] compute(double[][] input){
         output = new double[input.length][w0.length]; //TODO inutile
         return Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
     }

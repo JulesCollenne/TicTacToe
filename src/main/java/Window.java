@@ -13,14 +13,14 @@ import javafx.stage.Stage;
 
  */
 public class Window {
-    private Stage primaryStage;
-    private Group root;
-    private Scene scene;
-    private Canvas canvas;
-    private GraphicsContext graphicsContext;
+    Stage primaryStage;
+    Group root;
+    Scene scene;
+    Canvas canvas;
+    GraphicsContext graphicsContext;
 
-    private int windowWidth;
-    private int windowHeight;
+    int windowWidth;
+    int windowHeight;
 
 
     /**

@@ -1,21 +1,29 @@
-import static java.lang.Math.random;
-
 public class Game {
-    int[] board;
-    Window window;
-    Bot p1;
-    Player p2;
+    private int[] board;
+    private Window window;
+    private Bot p1;
+    private Player p2;
 
-    public Game(Window window) {
+    Game(Window window) {
         this.board = new int[9];
         this.window = window;
+        p1 = new Bot();
+        p2 = new Player(window,board,2);
     }
 
     public void StartGame(){
-        window.newGame();
-        p1.play();
-        p2.play();
-        isAligned();
+        int winner;
+        initializeBoard();
+        do {
+            window.newGame();
+            p1.play();
+            p2.play();
+            winner = isAligned();
+            if (winner == 1)
+                p1.won();
+            if (winner == 2)
+                p2.won();
+        } while (winner == 0);
         //TODO say who won
     }
 
@@ -28,7 +36,7 @@ public class Game {
      * 2 = p2
      * @return winner
      */
-    int isAligned(){
+    private int isAligned(){
         int i, result;
         for(i = 0; i < 3; i++) {
             result = isAlignedHorizontal(i);
@@ -62,6 +70,11 @@ public class Game {
         if((board[2] == board[4]) && (board[4] == board[6]))
             return board[0];
         return 0;
+    }
+
+    private void initializeBoard(){
+        for(int i = 0; i <board.length; i++)
+            board[i] = 0;
     }
 
 

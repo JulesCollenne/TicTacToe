@@ -8,7 +8,7 @@ public class Run extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        int trainIter = 100;
+        int trainIter = 5;
         int board[] = new int[9];
 
         Window window = new Window(primaryStage,500,400, board);
@@ -16,8 +16,8 @@ public class Run extends Application {
 
         window.initialize();
 
-        //for(int i=0;i<trainIter;i++) {
+        for(int i=0;i<trainIter;i++) {
             game.StartGame();
-        //}
+        }
     }
 }

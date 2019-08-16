@@ -56,7 +56,8 @@ public class Window {
      *
      */
     private void drawBoard(){
-        graphicsContext.setFill(Color.BLACK);
+        graphicsContext.setStroke(Color.BLACK);
+        graphicsContext.setLineWidth(5);
 
         for(int i=1;i<3;i++) {
             double x1 = (windowWidth / 3.) * i;
@@ -106,7 +107,7 @@ public class Window {
 
     void newGame(){
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fill();
+        graphicsContext.fillRect(0,0,windowWidth,windowHeight);
         drawBoard();
     }
 

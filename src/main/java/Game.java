@@ -1,4 +1,4 @@
-public class Game {
+class Game {
     private int[] board;
     private Window window;
     private Bot p1;
@@ -11,10 +11,13 @@ public class Game {
         p2 = new Bot(window,board,2);
     }
 
-    public void StartGame(){
+    /**
+     * Here is the general function of a game
+     *
+     *
+     */
+    void StartGame(){
         int winner, nbMove = 0;
-        boolean draw = false;
-        boolean isFinished = false;
 
         initializeBoard();
         window.newGame();
@@ -37,7 +40,14 @@ public class Game {
         System.out.println(winner + " won !");
     }
 
-    int analyzeMove(int nbMove){
+    /**
+     *
+     * @param nbMove the number of move that happened until now
+     * @return the winner if there is one ( p1 or p2 )
+     * 0 if there is no winner
+     * -1 if it's a draw
+     */
+    private int analyzeMove(int nbMove){
         int winner;
         winner = isAligned();
         if(winner != 0)
@@ -54,7 +64,8 @@ public class Game {
      * 0 = no one
      * 1 = p1
      * 2 = p2
-     * @return winner
+     * @return winner (1 for p1, 2 for p2 )
+     * 0 if no winner
      */
     private int isAligned(){
         int i, result;
@@ -92,6 +103,11 @@ public class Game {
         return 0;
     }
 
+
+    /**
+     *
+     *
+     */
     private void initializeBoard(){
         for(int i = 0; i <board.length; i++)
             board[i] = 0;

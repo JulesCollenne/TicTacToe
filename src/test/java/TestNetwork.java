@@ -22,4 +22,11 @@ public class TestNetwork extends Application {
 
     }
 
+    @Test
+    public void test() {
+        System.out.println(3/2);
+
+
+    }
+
 }

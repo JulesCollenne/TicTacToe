@@ -17,7 +17,7 @@ public class Network {
         this.inputSize = 9;
 
 
-        //TODO gérer les tailles de matrices
+        //TODO modifier les tailles des matrices w si nécessaire
         layers[0] = new Layer(1,inputSize,inputSize,inputSize);
 
         for(int i = 1; i < nbLayer-1; i++){
@@ -32,8 +32,7 @@ public class Network {
      * @param rawInput entrée
      * @return output
      */
-
-    public int computeOutput(int[] rawInput){
+    int computeOutput(int[] rawInput){
         double[][] input;
         int action;
 
@@ -48,7 +47,12 @@ public class Network {
         return action;
     }
 
-    public double[][] makeInput(int[] rawInput){
+    /**
+     * Coorect the type of the input
+     * @param rawInput the input of a bad type
+     * @return the correct input of the good type
+     */
+    private double[][] makeInput(int[] rawInput){
         double[][] input = new double[1][rawInput.length];
 
         normalize(input);
@@ -56,13 +60,22 @@ public class Network {
         return input;
     }
 
-    void normalize(double[][] input){
+    /**
+     * Normalize the input matrix
+     * @param input input
+     */
+    private void normalize(double[][] input){
         for(int i = 0; i < input.length; i++)
             for(int j = 0; j < input.length; j++)
             input[i][j] /= 2;
     }
 
-    int chooseBest(double[][] output){
+    /**
+     * Take the best move ( higher score )
+     * @param output outpute of the neural network
+     * @return maximum ind, the bets move found
+     */
+    private int chooseBest(double[][] output){
         double max = 0;
         int maxInd = 0;
         for(int i = 0; i < output.length; i++) {

@@ -1,6 +1,11 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Run is the class that will run the program
+ * Window will be created etc...
+ *
+ */
 public class Run extends Application {
     public static void main(String[] args) {
         launch(args);

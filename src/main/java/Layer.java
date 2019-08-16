@@ -1,5 +1,9 @@
 import java.util.Random;
 
+/**
+ * Layer class, used in the Network class
+ * One Network has several Layers
+ */
 class Layer {
     double[][] input;
     double[][] w0;
@@ -24,6 +28,11 @@ class Layer {
                 b0[i][j] = rand.nextDouble();
     }
 
+    /**
+     * Compute the neural network of the layer
+     * @param input input
+     * @return output
+     */
     double[][] compute(double[][] input){
         //output = new double[input.length][w0.length];
         output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));

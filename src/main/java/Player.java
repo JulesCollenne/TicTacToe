@@ -1,12 +1,11 @@
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class Player extends Application {
     private int playerNum;
-    boolean isPlaying;
+    private boolean isPlaying;
     private Window window;
     private int board[];
 

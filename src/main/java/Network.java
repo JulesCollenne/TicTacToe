@@ -29,11 +29,15 @@ public class Network {
 
     /**
      * Compute output of the network depending on input
-     * @param input entrée
+     * @param rawInput entrée
      * @return output
      */
 
-    public double[][] computeOutput(double[][] input){
+    public double[][] computeOutput(int[] rawInput){
+        double[][] input;
+
+        input = makeInput(rawInput);
+
         layers[1].input = layers[0].compute(input);
         for(int i=1;i<layers.length-1;i++){
             layers[i+1].input = layers[i].compute(input);
@@ -41,4 +45,19 @@ public class Network {
         output = layers[nbLayer].output;
         return output;
     }
+
+    public double[][] makeInput(int[] rawInput){
+        double[][] input = new double[1][rawInput.length];
+
+        normalize(input);
+
+        return input;
+    }
+
+    void normalize(double[][] input){
+        for(int i = 0; i < input.length; i++)
+            for(int j = 0; j < input.length; j++)
+            input[i][j] /= 2;
+    }
+
 }

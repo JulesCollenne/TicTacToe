@@ -9,15 +9,15 @@ public class Run extends Application {
     @Override
     public void start(Stage primaryStage) {
         int trainIter = 100;
+        int board[] = new int[9];
 
-        Window window = new Window(primaryStage,500,400);
-        Game game = new Game(window);
+        Window window = new Window(primaryStage,500,400, board);
+        Game game = new Game(window, board);
 
         window.initialize();
 
-        for(int i=0;i<trainIter;i++) {
-
-
-        }
+        //for(int i=0;i<trainIter;i++) {
+            game.StartGame();
+        //}
     }
 }

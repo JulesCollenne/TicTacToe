@@ -1,11 +1,12 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class Player extends Application {
     private int playerNum;
-    private boolean isPlaying;
+    boolean isPlaying;
     private Window window;
     private int board[];
 
@@ -25,22 +26,13 @@ public class Player extends Application {
         @Override
         public void handle(MouseEvent e) {
             System.out.println("Hello World");//TODO
-            board[getSquare()] = playerNum;
-            isPlaying = false;
+            if(window.chooseSquare(window.getSquare(e.getX(),e.getY()), playerNum) != -1)
+                isPlaying = false;
         }
     };
 
     void won(){
 
-    }
-
-    /**
-     *
-     * @return le numéro de la case en fonction des coordonnées
-     */
-    private int getSquare(){
-        //TODO
-        return 0;
     }
 
     @Override

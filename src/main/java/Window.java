@@ -21,6 +21,7 @@ public class Window {
 
     int windowWidth;
     int windowHeight;
+    int[] board;
 
 
     /**
@@ -29,13 +30,16 @@ public class Window {
      * @param windowWidth
      * @param windowHeight
      */
-    Window(Stage primaryStage, int windowWidth, int windowHeight) {
+    Window(Stage primaryStage, int windowWidth, int windowHeight, int[] board) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         this.primaryStage = primaryStage;
         this.root = new Group();
         this.scene = new Scene(root, windowWidth, windowHeight);
         this.canvas = new Canvas(windowWidth, windowHeight);
+        this.board = board;
+
+
         graphicsContext = canvas.getGraphicsContext2D();
     }
 
@@ -106,7 +110,51 @@ public class Window {
         drawBoard();
     }
 
+    /**
+     *
+     * @return le numéro de la case en fonction des coordonnées
+     */
+    int getSquare(double x, double y){
+        if(y < windowHeight/3) {
+            if (x < windowWidth / 3)
+                return 0;
+            else if(x < windowWidth / 3 * 2)
+                return 1;
+            else
+                return 2;
+        }
 
+        else if(y < windowHeight/3 * 2) {
+            if (x < windowWidth / 3)
+                return 3;
+            else if(x < windowWidth / 3 * 2)
+                return 4;
+            else
+                return 5;
+        }
+
+        else {
+            if (x < windowWidth / 3)
+                return 6;
+            else if(x < windowWidth / 3 * 2)
+                return 7;
+            else
+                return 8;
+        }
+    }
+
+    public int chooseSquare(int square, int nbPlayer) {
+        if(isPossible(square)){
+            board[square] = nbPlayer;
+            drawPieces(board);
+            return 0;
+        }
+        return -1;
+    }
+
+    public boolean isPossible(int square){
+        return board[square] == 0;
+    }
 
     private void refresh(){
         primaryStage.setScene(scene);

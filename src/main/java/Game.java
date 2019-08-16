@@ -2,20 +2,20 @@ public class Game {
     private int[] board;
     private Window window;
     private Bot p1;
-    private Player p2;
+    private Bot p2;
 
-    Game(Window window) {
-        this.board = new int[9];
+    Game(Window window, int[] board) {
+        this.board = board;
         this.window = window;
-        p1 = new Bot();
-        p2 = new Player(window,board,2);
+        p1 = new Bot(window,board,1);
+        p2 = new Bot(window,board,2);
     }
 
     public void StartGame(){
         int winner;
         initializeBoard();
+        window.newGame();
         do {
-            window.newGame();
             p1.play();
             p2.play();
             winner = isAligned();
@@ -25,6 +25,8 @@ public class Game {
                 p2.won();
         } while (winner == 0);
         //TODO say who won
+
+        System.out.println(winner + " won !");
     }
 
 

@@ -11,11 +11,11 @@ public class TestWindow extends Application {
 
         @Override
         public void start(Stage primaryStage) {
-            window = new Window(primaryStage,500,400);
-            Bot bot = new Bot();
+            int board[] = new int[9];
 
+            Window window = new Window(primaryStage,500,400, board);
+            Bot bot = new Bot(window, board,1);
 
-            int[] board = new int[9];
             for(int i=0;i<9;i++)
                 board[i] = 1;
 

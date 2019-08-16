@@ -12,21 +12,39 @@ public class Game {
     }
 
     public void StartGame(){
-        int winner;
+        int winner, nbMove = 0;
+        boolean draw = false;
+        boolean isFinished = false;
+
         initializeBoard();
         window.newGame();
         do {
             p1.play();
+            nbMove++;
+            winner = analyzeMove(nbMove);
+            if(winner != 0)
+                break;
             p2.play();
-            winner = isAligned();
-            if (winner == 1)
-                p1.won();
-            if (winner == 2)
-                p2.won();
+            nbMove++;
+            winner = analyzeMove(nbMove);
         } while (winner == 0);
-        //TODO say who won
+
+        if (winner == 1)
+            p1.won();
+        if (winner == 2)
+            p2.won();
 
         System.out.println(winner + " won !");
+    }
+
+    int analyzeMove(int nbMove){
+        int winner;
+        winner = isAligned();
+        if(winner != 0)
+            return  winner;
+        if(nbMove > 8)
+            return -1;
+        return 0;
     }
 
 
@@ -41,7 +59,7 @@ public class Game {
     private int isAligned(){
         int i, result;
         for(i = 0; i < 3; i++) {
-            result = isAlignedHorizontal(i);
+            result = isAlignedHorizontal(i*3);
             if (result != 0)
                 return result;
             result = isAlignedVertical(i);
@@ -70,7 +88,7 @@ public class Game {
         if((board[0] == board[4]) && (board[4] == board[8]))
             return board[0];
         if((board[2] == board[4]) && (board[4] == board[6]))
-            return board[0];
+            return board[2];
         return 0;
     }
 

@@ -33,17 +33,19 @@ public class Network {
      * @return output
      */
 
-    public double[][] computeOutput(int[] rawInput){
+    public int computeOutput(int[] rawInput){
         double[][] input;
+        int action;
 
         input = makeInput(rawInput);
 
         layers[1].input = layers[0].compute(input);
         for(int i=1;i<layers.length-1;i++){
-            layers[i+1].input = layers[i].compute(input);
+            layers[i+1].input = layers[i].compute(layers[i-1].output);
         }
-        output = layers[nbLayer].output;
-        return output;
+        output = layers[nbLayer-1].compute(layers[layers.length-2].output);
+        action = chooseBest(output);
+        return action;
     }
 
     public double[][] makeInput(int[] rawInput){
@@ -60,4 +62,15 @@ public class Network {
             input[i][j] /= 2;
     }
 
+    int chooseBest(double[][] output){
+        double max = 0;
+        int maxInd = 0;
+        for(int i = 0; i < output.length; i++) {
+            if(max < output[i][0]){
+                max = output[i][0];
+                maxInd = i;
+            }
+        }
+        return  maxInd;
+    }
 }

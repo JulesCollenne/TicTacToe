@@ -25,8 +25,9 @@ class Layer {
     }
 
     double[][] compute(double[][] input){
-        output = new double[input.length][w0.length]; //TODO inutile
-        return Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        //output = new double[input.length][w0.length];
+        output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        return output;
     }
 
 }

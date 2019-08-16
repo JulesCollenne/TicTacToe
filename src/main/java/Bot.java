@@ -21,11 +21,17 @@ class Bot {
     }
 
     void play(){
+        int action;
+
         Random random = new Random();
 
-        network.computeOutput(board);
+        //action = random.nextInt(9)
 
-        while(window.chooseSquare(random.nextInt(9),playerNum) == -1);
+        action = network.computeOutput(board);
+
+        while(window.chooseSquare(action,playerNum) == -1){
+            action = random.nextInt(9);
+        }
         //TODO
     }
 

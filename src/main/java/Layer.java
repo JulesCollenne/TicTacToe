@@ -39,4 +39,25 @@ class Layer {
         return output;
     }
 
+    /**
+     * Make a new baby by mixing 2 genes
+     * @param l1 parent 1
+     * @param l2 parent 2 (lol)
+     */
+    public void mixWeights(Layer l1, Layer l2) {
+        int i,j;
+        Random rand = new Random();
+
+        for(i = 0; i < w0.length; i++){
+            for(j = 0; j < w0[0].length; j++){
+                w0[i][j] = rand.nextDouble() < 0.5 ? l1.w0[i][j] : l2.w0[i][j];
+            }
+        }
+
+        for(i = 0; i < b0.length; i++){
+            for(j = 0; j < b0[0].length; j++){
+                b0[i][j] = rand.nextDouble() < 0.5 ? l1.b0[i][j] : l2.b0[i][j];
+            }
+        }
+    }
 }

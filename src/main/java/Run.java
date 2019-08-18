@@ -17,12 +17,20 @@ public class Run extends Application {
         int board[] = new int[9];
 
         Window window = new Window(primaryStage,500,400, board);
-        Game game = new Game(window, board);
-
         window.initialize();
 
+        Population population = new Population(20,window,board);
+
+        Game game;
+
         for(int i=0;i<trainIter;i++) {
-            game.StartGame();
+            for(int j = 0; j < population.size; j += 2) {
+                game = new Game(window, board,population.bots[i],population.bots[i+1]);
+                game.StartGame();
+            }
+            population.MakeNewGeneration();
+            System.out.println(i);
         }
+        System.out.println("CC");
     }
 }

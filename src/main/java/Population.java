@@ -1,4 +1,6 @@
 public class Population {
+    Window window;
+    int[] board;
     int size;
     Bot bots[];
     int currentBaby;
@@ -8,10 +10,16 @@ public class Population {
      * Population size MUST be even
      * @param size size of population ( EVEN )
      */
-    public Population(int size) {
+    Population(int size, Window window, int[] board) {
         this.size = size;
-        bots = new Bot[this.size];
         currentBaby = size/2;
+        this.window = window;
+        this.board = board;
+
+        bots = new Bot[this.size];
+
+        for(int i = 0; i < size; i++)
+            bots[i] = new Bot(window,board,i+1);
     }
 
     /**
@@ -20,26 +28,36 @@ public class Population {
      * @param b1 first bot
      * @param b2 second bot
      */
-    public void Crossover(Bot b1, Bot b2){
-        int i;
-
+    public Bot Crossover(Bot b1, Bot b2){
         Bot baby = new Bot(b1.window,b1.board,currentBaby);
 
-        for(i = 0; i < b1.network.nbLayer; i++){
+        baby.initializeGenes(b1,b2);
 
-        }
+        return baby;
     }
 
+    /**
+     * Make a new generation of Bots by crossing over the genes of the winner bots
+     */
     public void MakeNewGeneration(){
-        int i, botNum,newInd = 0;
+        int i, botNum = size/2,newInd = 0;
 
         Bot[] newGeneration = new Bot[size];
 
-        for(i = 0; i < size; i++){
-            if(bots[i].won) {
-                newGeneration[newInd] = bots[i];
-                newInd++;
+        while(newInd < size/2) {
+            for (i = 0; i < size; i++) {
+                if (bots[i].won) {
+                    newGeneration[newInd] = bots[i];
+                    newInd++;
+                }
             }
+        }
+
+        for(i = 0; i < size/2; i+=2){
+            newGeneration[botNum] = Crossover(newGeneration[i],newGeneration[i+1]);
+            botNum++;
+            newGeneration[botNum] = Crossover(newGeneration[i],newGeneration[i+1]);
+            botNum++;
         }
 
 

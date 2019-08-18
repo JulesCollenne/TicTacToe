@@ -12,7 +12,7 @@ class Bot {
 
     /*
 
-    actions : 0 | 1 | 2
+    actions :0 | 1 | 2
              3 | 4 | 5
              7 | 8 | 9
      */
@@ -49,4 +49,9 @@ class Bot {
         won = true;
         //TODO
     }
+
+    void initializeGenes(Bot b1, Bot b2){
+        network.mixGenes(b1.network,b2.network);
+    }
+
 }

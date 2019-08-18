@@ -4,11 +4,11 @@ class Game {
     private Bot p1;
     private Bot p2;
 
-    Game(Window window, int[] board) {
+    Game(Window window, int[] board, Bot p1, Bot p2) {
         this.board = board;
         this.window = window;
-        p1 = new Bot(window,board,1);
-        p2 = new Bot(window,board,2);
+        this.p1 = p1;
+        this.p2 = p2;
     }
 
     /**
@@ -84,21 +84,21 @@ class Game {
     }
 
     private int isAlignedHorizontal(int i){
-        if ((board[i] == board[i+1]) && (board[i+1] == board[i+2]))
+        if ((board[i] == board[i+1]) && (board[i+1] == board[i+2]) && board[i] != 0)
             return board[i];
         return 0;
     }
 
     private int isAlignedVertical(int i){
-        if((board[i] == board[i+3]) && (board[i+3] == board[i+6]))
+        if((board[i] == board[i+3]) && (board[i+3] == board[i+6]) && board[i] != 0)
             return board[i];
         return 0;
     }
 
     private int isAlignedDiagonal(){
-        if((board[0] == board[4]) && (board[4] == board[8]))
+        if((board[0] == board[4]) && (board[4] == board[8]) && board[0] != 0)
             return board[0];
-        if((board[2] == board[4]) && (board[4] == board[6]))
+        if((board[2] == board[4]) && (board[4] == board[6]) && board[2] != 0)
             return board[2];
         return 0;
     }

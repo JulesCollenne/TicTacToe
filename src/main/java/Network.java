@@ -86,4 +86,10 @@ public class Network {
         }
         return  maxInd;
     }
+
+    public void mixGenes(Network n1, Network n2) {
+        for(int i = 0; i < nbLayer; i++){
+            layers[i].mixWeights(n1.layers[i], n2.layers[i]);
+        }
+    }
 }

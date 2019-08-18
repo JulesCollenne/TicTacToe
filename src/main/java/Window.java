@@ -202,7 +202,7 @@ class Window {
     /**
      * Draw everything on the board
      */
-    private void refresh(){
+    void refresh(){
         primaryStage.setScene(scene);
         primaryStage.show();
     }

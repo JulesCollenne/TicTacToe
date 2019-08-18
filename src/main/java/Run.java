@@ -31,6 +31,5 @@ public class Run extends Application {
             population.MakeNewGeneration();
             System.out.println(i);
         }
-        System.out.println("CC");
     }
 }

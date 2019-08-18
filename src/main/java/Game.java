@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class Game {
     private int[] board;
     private Window window;
@@ -38,6 +40,8 @@ class Game {
             p2.won();
 
         System.out.println(winner + " won !");
+
+        window.refresh();
     }
 
     /**

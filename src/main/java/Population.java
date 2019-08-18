@@ -18,8 +18,10 @@ public class Population {
 
         bots = new Bot[this.size];
 
-        for(int i = 0; i < size; i++)
-            bots[i] = new Bot(window,board,i+1);
+        for(int i = 0; i < size; i += 2) {
+            bots[i] = new Bot(window, board, 1);
+            bots[i+1] = new Bot(window, board, 2);
+        }
     }
 
     /**

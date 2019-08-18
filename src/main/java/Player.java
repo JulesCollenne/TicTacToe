@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 public class Player extends Application {
     private int playerNum;
-    private boolean isPlaying;
+    boolean isPlaying;
     private Window window;
     private int board[];
 
@@ -25,8 +25,9 @@ public class Player extends Application {
         @Override
         public void handle(MouseEvent e) {
             System.out.println("Hello World");//TODO
-            if(window.chooseSquare(window.getSquare(e.getX(),e.getY()), playerNum) != -1)
-                isPlaying = false;
+            if(window.chooseSquare(window.getSquare(e.getX(),e.getY()), playerNum) != -1){
+
+            }
         }
     };
 

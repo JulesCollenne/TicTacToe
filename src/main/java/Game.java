@@ -1,3 +1,6 @@
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+
 import java.util.Scanner;
 
 class Game {
@@ -5,8 +8,16 @@ class Game {
     private Window window;
     private Bot p1;
     private Bot p2;
+    private  Player player;
 
     Game(Window window, int[] board, Bot p1, Bot p2) {
+        this.board = board;
+        this.window = window;
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+
+    Game(Window window, int[] board, Bot p1, Player player) {
         this.board = board;
         this.window = window;
         this.p1 = p1;
@@ -43,6 +54,50 @@ class Game {
 
         window.refresh();
     }
+
+    /**
+     * A game which is Bot vs Human
+     */
+    void StartGamePlayer(){
+        int winner, nbMove = 0;
+
+        initializeBoard();
+        window.newGame();
+        do {
+            p1.play();
+            nbMove++;
+            winner = analyzeMove(nbMove);
+            if(winner != 0)
+                break;
+            p2.play();
+            nbMove++;
+            winner = analyzeMove(nbMove);
+        } while (winner == 0);
+
+        if (winner == 1)
+            p1.won();
+        if (winner == 2)
+            p2.won();
+
+        System.out.println(winner + " won !");
+
+        window.refresh();
+    }
+
+    void playerPlay(){
+        window.canvas.addEventFilter(MouseEvent.MOUSE_CLICKED,eventHandler);
+    }
+
+    EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent e) {
+            System.out.println("Hello World");//TODO
+            if(window.chooseSquare(window.getSquare(e.getX(),e.getY()), playerNum) != -1){
+
+            }
+        }
+    };
+
 
     /**
      *

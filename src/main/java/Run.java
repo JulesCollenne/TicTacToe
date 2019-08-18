@@ -13,7 +13,7 @@ public class Run extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        int trainIter = 5;
+        int trainIter = 2;
         int board[] = new int[9];
 
         Window window = new Window(primaryStage,500,400, board);

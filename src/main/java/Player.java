@@ -4,7 +4,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class Player extends Application {
-    private int playerNum;
+    int playerNum;
     boolean isPlaying;
     private Window window;
     private int board[];

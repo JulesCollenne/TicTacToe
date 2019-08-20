@@ -13,8 +13,8 @@ public class TestFiles extends Application {
         Window window = new Window(primaryStage,500,400, board);
         Bot bot = new Bot(window, board,1);
 
-        //testWrite(bot);
-        testRead(bot);
+        testWrite(bot);
+        //testRead(bot);
     }
 
     @Test

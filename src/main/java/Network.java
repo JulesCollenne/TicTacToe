@@ -46,7 +46,7 @@ class Network {
     }
 
     /**
-     * Coorect the type of the input
+     * Correct the type of the input
      * @param rawInput the input of a bad type
      * @return the correct input of the good type
      */
@@ -88,6 +88,12 @@ class Network {
     void mixGenes(Network n1, Network n2) {
         for(int i = 0; i < nbLayer; i++){
             layers[i].mixWeights(n1.layers[i], n2.layers[i]);
+        }
+    }
+
+    void mutate() {
+        for(Layer layer : layers){
+            layer.mutate();
         }
     }
 }

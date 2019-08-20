@@ -19,9 +19,12 @@ public class RunHuman extends Application {
         window.initialize();
 
         GameHuman game;
+        Files files = new Files();
 
         Bot bot = new Bot(window,board,1);
         Player player = new Player(2);
+
+        files.loadWeights(bot);
 
         game = new GameHuman(window, board,bot, player);
         game.StartGame();

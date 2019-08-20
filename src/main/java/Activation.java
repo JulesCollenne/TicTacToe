@@ -6,7 +6,7 @@ public class Activation {
         return 0;
     }
 
-    private static double relu(double x){
+    static double relu(double x){
         return max(0,x);
     }
 

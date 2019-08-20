@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,9 +20,13 @@ class Files {
 
     private FileWriter fileWriter;
     private FileReader fileReader;
+    private BufferedReader bufferedReader;
 
+    /**
+     * Save the weigths of the bot inside a file ( weights.txt )
+     * @param bot the bot containing the weights
+     */
     void saveWeights(Bot bot) {
-
         try {
             fileWriter = new FileWriter("weights.txt");
         } catch (IOException e) {
@@ -43,6 +48,10 @@ class Files {
         }
     }
 
+    /**
+     * Load weights from file to bot
+     * @param bot we will save this bot's weights
+     */
     void loadWeights(Bot bot){
 
         try {
@@ -50,6 +59,8 @@ class Files {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        bufferedReader = new BufferedReader(fileReader);
 
         Network network = bot.network;
         Layer layer;
@@ -66,7 +77,10 @@ class Files {
         }
     }
 
-
+    /**
+     * Write the matrix inside the file
+     * @param matrix matric of weight we gonna write
+     */
     private void writeMatrix(double[][] matrix){
         for (double[] aMatrix : matrix) {
             for (int j = 0; j < matrix[0].length; j++) {
@@ -80,12 +94,15 @@ class Files {
         }
     }
 
+    /**
+     * Read the file and put it inside the matrix
+     * @param matrix that gonna contain the file's data
+     */
     private void readMatrix(double [][] matrix){
         for(int i = 0; i < matrix.length; i++){
             for(int j = 0; j < matrix[0].length; j++){
                 try {
-                    matrix[i][j] = fileReader.read();
-                    System.out.println(matrix[i][j]);
+                    matrix[i][j] = Double.parseDouble(bufferedReader.readLine());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

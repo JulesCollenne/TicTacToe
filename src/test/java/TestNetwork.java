@@ -4,12 +4,7 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestNetwork extends Application {
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-    }
+public class TestNetwork{
 
     @Test
     public void testNetwork() {

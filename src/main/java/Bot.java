@@ -1,7 +1,7 @@
 import java.util.Random;
 
 /**
- * The AI playing
+ * The playing AI
  */
 class Bot {
     Network network;
@@ -51,6 +51,10 @@ class Bot {
 
     void initializeGenes(Bot b1, Bot b2){
         network.mixGenes(b1.network,b2.network);
+    }
+
+    void mutate(){
+        network.mutate();
     }
 
 }

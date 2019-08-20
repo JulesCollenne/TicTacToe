@@ -36,7 +36,12 @@ class GameHuman {
             System.out.println("Bot won !");
             window.canvas.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
         }
-        window.canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+        else if (winner == -1){
+            System.out.println("Draw !");
+            window.canvas.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+        }
+        else
+            window.canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
     }
 
 
@@ -56,9 +61,13 @@ class GameHuman {
                 player.won();
                 System.out.println("Player won !");
                 window.canvas.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-            } else {
-                BotTurn();
             }
+            else if (winner == -1){
+                System.out.println("Draw !");
+                window.canvas.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+            }
+            else
+                BotTurn();
         }
     };
 

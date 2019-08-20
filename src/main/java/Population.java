@@ -12,7 +12,7 @@ class Population {
      */
     Population(int size, Window window, int[] board) {
         this.size = size;
-        currentBaby = size/2;
+        currentBaby = 1;
         this.window = window;
         this.board = board;
 
@@ -32,8 +32,10 @@ class Population {
      */
     private Bot Crossover(Bot b1, Bot b2){
         Bot baby = new Bot(b1.window,b1.board,currentBaby);
+        currentBaby = currentBaby == 1 ? 2 : 1;
 
         baby.initializeGenes(b1,b2);
+        baby.mutate();
 
         return baby;
     }
@@ -61,7 +63,6 @@ class Population {
             newGeneration[botNum] = Crossover(newGeneration[i],newGeneration[i+1]);
             botNum++;
         }
-
-
+        bots = newGeneration;
     }
 }

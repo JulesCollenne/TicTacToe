@@ -18,11 +18,12 @@ public class RunHuman extends Application {
         Window window = new Window(primaryStage,500,400, board);
         window.initialize();
 
-        Population population = new Population(20,window,board);
+        GameHuman game;
 
-        Game game;
+        Bot bot = new Bot(window,board,1);
+        Player player = new Player(window,board,2);
 
-        //game = new Game(window, board,population.bots[i],population.bots[i+1]);
-        //game.StartGame();
+        game = new GameHuman(window, board,bot, player);
+        game.StartGame();
     }
 }

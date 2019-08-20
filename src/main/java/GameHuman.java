@@ -1,46 +1,77 @@
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+
 import static java.lang.Thread.sleep;
 
-class Game {
+public class GameHuman {
+
     private int[] board;
     private Window window;
-    private Bot p1;
-    private Bot p2;
-
-    Game(Window window, int[] board, Bot p1, Bot p2) {
-        this.board = board;
-        this.window = window;
-        this.p1 = p1;
-        this.p2 = p2;
-    }
+    private Bot bot;
+    private Player player;
+    private int nbMove;
+    private int winner;
 
     /**
-     * Here is the general function of a game
+     *
+     * @param window
+     * @param board
+     * @param bot
      */
-    void StartGame() {
-        int winner, nbMove = 0;
+    public GameHuman(Window window, int[] board, Bot bot, Player player){
+        this.window = window;
+        this.board = board;
+        this.bot = bot;
+        this.player = player;
+        nbMove = 0;
+        winner = 0;
+    }
 
+
+    void StartGame() {
         initializeBoard();
         window.newGame();
-        do {
-            p1.play();
-            nbMove++;
-            winner = analyzeMove(nbMove);
-            if (winner != 0)
-                break;
-            p2.play();
-            nbMove++;
-            winner = analyzeMove(nbMove);
-        } while (winner == 0);
 
-        if (winner == 1)
-            p1.won();
-        if (winner == 2)
-            p2.won();
-
-        System.out.println(winner + " won !");
-
-        window.refresh();
+        BotTurn();
     }
+
+    void BotTurn(){
+        bot.play();
+        nbMove++;
+        winner = analyzeMove(nbMove);
+        if (winner == 1) {
+            bot.won();
+            System.out.println("Bot won !");
+            window.canvas.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+        }
+        window.canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+    }
+
+
+    EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent e) {
+
+            int action = window.getSquare(e.getX(),e.getY());
+
+            if(window.chooseSquare(action,player.playerNum) == -1)
+                return;
+
+            nbMove++;
+            winner = analyzeMove(nbMove);
+
+            if (winner == 2) {
+                player.won();
+                System.out.println("Player won !");
+                window.canvas.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+            }
+            else{
+                BotTurn();
+            }
+        }
+    };
+
 
     /**
      * @param nbMove the number of move that happened until now
@@ -114,4 +145,3 @@ class Game {
             board[i] = 0;
     }
 }
-

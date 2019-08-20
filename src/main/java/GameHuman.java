@@ -1,10 +1,7 @@
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
-import static java.lang.Thread.sleep;
-
-public class GameHuman {
+class GameHuman {
 
     private int[] board;
     private Window window;
@@ -13,13 +10,7 @@ public class GameHuman {
     private int nbMove;
     private int winner;
 
-    /**
-     *
-     * @param window
-     * @param board
-     * @param bot
-     */
-    public GameHuman(Window window, int[] board, Bot bot, Player player){
+    GameHuman(Window window, int[] board, Bot bot, Player player){
         this.window = window;
         this.board = board;
         this.bot = bot;
@@ -36,7 +27,7 @@ public class GameHuman {
         BotTurn();
     }
 
-    void BotTurn(){
+    private void BotTurn(){
         bot.play();
         nbMove++;
         winner = analyzeMove(nbMove);
@@ -49,13 +40,13 @@ public class GameHuman {
     }
 
 
-    EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+    private EventHandler<MouseEvent> eventHandler = new EventHandler<>() {
         @Override
         public void handle(MouseEvent e) {
 
-            int action = window.getSquare(e.getX(),e.getY());
+            int action = window.getSquare(e.getX(), e.getY());
 
-            if(window.chooseSquare(action,player.playerNum) == -1)
+            if (window.chooseSquare(action, player.playerNum) == -1)
                 return;
 
             nbMove++;
@@ -65,8 +56,7 @@ public class GameHuman {
                 player.won();
                 System.out.println("Player won !");
                 window.canvas.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-            }
-            else{
+            } else {
                 BotTurn();
             }
         }

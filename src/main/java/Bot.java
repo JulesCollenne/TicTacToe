@@ -47,7 +47,6 @@ class Bot {
      */
     void won(){
         won = true;
-        //TODO
     }
 
     void initializeGenes(Bot b1, Bot b2){

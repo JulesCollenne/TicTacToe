@@ -11,7 +11,7 @@ class Layer {
 
     double[][] output;
 
-    public Layer(int nbLinesW,int nbColumnsW, int nbLinesB,int nbColumnsB){
+    Layer(int nbLinesW,int nbColumnsW, int nbLinesB,int nbColumnsB){
         int i,j;
 
         Random rand = new Random();
@@ -44,7 +44,7 @@ class Layer {
      * @param l1 parent 1
      * @param l2 parent 2 (lol)
      */
-    public void mixWeights(Layer l1, Layer l2) {
+    void mixWeights(Layer l1, Layer l2) {
         int i,j;
         Random rand = new Random();
 

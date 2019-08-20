@@ -1,8 +1,6 @@
-public class Network {
-    int inputSize;
+class Network {
     int nbLayer;
     Layer[] layers;
-    double[][] output;
 
     /**
         hi+1 = sigma( w * h + b0 )
@@ -14,17 +12,17 @@ public class Network {
     Network(int nbLayer){
         this.nbLayer = nbLayer;
         this.layers = new Layer[nbLayer];
-        this.inputSize = 9;
+        int inputSize = 9;
 
 
         //TODO modifier les tailles des matrices w si nécessaire
-        layers[0] = new Layer(1,inputSize,inputSize,inputSize);
+        layers[0] = new Layer(1, inputSize, inputSize, inputSize);
 
         for(int i = 1; i < nbLayer-1; i++){
-            layers[i] = new Layer(inputSize,inputSize,inputSize,inputSize);
+            layers[i] = new Layer(inputSize, inputSize, inputSize, inputSize);
         }
 
-        layers[nbLayer-1] = new Layer(inputSize,1,inputSize,1);
+        layers[nbLayer-1] = new Layer(inputSize,1, inputSize,1);
     }
 
     /**
@@ -42,7 +40,7 @@ public class Network {
         for(int i=1;i<layers.length-1;i++){
             layers[i+1].input = layers[i].compute(layers[i-1].output);
         }
-        output = layers[nbLayer-1].compute(layers[layers.length-2].output);
+        double[][] output = layers[nbLayer - 1].compute(layers[layers.length - 2].output);
         action = chooseBest(output);
         return action;
     }
@@ -87,7 +85,7 @@ public class Network {
         return  maxInd;
     }
 
-    public void mixGenes(Network n1, Network n2) {
+    void mixGenes(Network n1, Network n2) {
         for(int i = 0; i < nbLayer; i++){
             layers[i].mixWeights(n1.layers[i], n2.layers[i]);
         }

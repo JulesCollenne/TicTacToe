@@ -3,8 +3,6 @@ import javafx.stage.Stage;
 
 public class TestWindow extends Application {
 
-    Window window;
-
     public static void main(String[] args) {
             launch(args);
         }

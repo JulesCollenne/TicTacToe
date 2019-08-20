@@ -1,9 +1,9 @@
-public class Population {
-    Window window;
+class Population {
+    private Window window;
     int[] board;
     int size;
     Bot bots[];
-    int currentBaby;
+    private int currentBaby;
 
     /**
      *
@@ -30,7 +30,7 @@ public class Population {
      * @param b1 first bot
      * @param b2 second bot
      */
-    public Bot Crossover(Bot b1, Bot b2){
+    private Bot Crossover(Bot b1, Bot b2){
         Bot baby = new Bot(b1.window,b1.board,currentBaby);
 
         baby.initializeGenes(b1,b2);
@@ -41,7 +41,7 @@ public class Population {
     /**
      * Make a new generation of Bots by crossing over the genes of the winner bots
      */
-    public void MakeNewGeneration(){
+    void MakeNewGeneration(){
         int i, botNum = size/2,newInd = 0;
 
         Bot[] newGeneration = new Bot[size];

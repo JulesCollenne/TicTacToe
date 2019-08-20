@@ -1,5 +1,3 @@
-import static java.lang.Thread.sleep;
-
 class Game {
     private int[] board;
     private Window window;

@@ -21,7 +21,7 @@ public class RunHuman extends Application {
         GameHuman game;
 
         Bot bot = new Bot(window,board,1);
-        Player player = new Player(window,board,2);
+        Player player = new Player(2);
 
         game = new GameHuman(window, board,bot, player);
         game.StartGame();

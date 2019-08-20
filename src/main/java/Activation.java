@@ -6,11 +6,11 @@ public class Activation {
         return 0;
     }
 
-    public static double relu(double x){
+    private static double relu(double x){
         return max(0,x);
     }
 
-    public static double[][] relu(double[][] x){
+    static double[][] relu(double[][] x){
         double[][] y = new double[x.length][x[0].length];
         for(int i=0;i<x.length;i++)
             for(int j=0;j<x[0].length;j++)

@@ -1,6 +1,6 @@
-public class Calculs {
+class Calculs {
 
-    public static double[][] matrixProduct(double A[][], double B[][]){
+    static double[][] matrixProduct(double A[][], double B[][]){
         double C[][] = new double[B.length][A[0].length];
 
         for(int i=0;i<B.length;i++){
@@ -13,7 +13,7 @@ public class Calculs {
         return C;
     }
 
-    public static double[][] matrixAdd(double A[][], double B[][]) {
+    static double[][] matrixAdd(double A[][], double B[][]) {
         double y[][] = new double[A.length][A[0].length];
 
         for(int i=0;i<A.length;i++){

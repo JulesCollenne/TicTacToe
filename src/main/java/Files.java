@@ -15,26 +15,18 @@ import java.io.IOException;
  * }
  *
  */
-public class Files {
+class Files {
 
-    FileWriter fileWriter;
-    FileReader fileReader;
+    private FileWriter fileWriter;
+    private FileReader fileReader;
 
-    public Files(){
+    void saveWeights(Bot bot) {
+
         try {
             fileWriter = new FileWriter("weights.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        try {
-            fileReader = new FileReader("weights.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    void saveWeights(Bot bot){
 
         Network network = bot.network;
         Layer layer;
@@ -44,9 +36,20 @@ public class Files {
             writeMatrix(layer.w0);
             writeMatrix(layer.b0);
         }
+        try {
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     void loadWeights(Bot bot){
+
+        try {
+            fileReader = new FileReader("weights.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Network network = bot.network;
         Layer layer;
@@ -56,14 +59,20 @@ public class Files {
             readMatrix(layer.w0);
             readMatrix(layer.b0);
         }
+        try {
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
     private void writeMatrix(double[][] matrix){
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
+        for (double[] aMatrix : matrix) {
+            for (int j = 0; j < matrix[0].length; j++) {
                 try {
-                    fileWriter.write(Double.toString(matrix[i][j]));
+                    fileWriter.write(Double.toString(aMatrix[j]));
+                    fileWriter.write('\n');
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -75,7 +84,8 @@ public class Files {
         for(int i = 0; i < matrix.length; i++){
             for(int j = 0; j < matrix[0].length; j++){
                 try {
-                    fileReader.read();
+                    matrix[i][j] = fileReader.read();
+                    System.out.println(matrix[i][j]);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

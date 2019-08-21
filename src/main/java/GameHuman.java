@@ -19,7 +19,9 @@ class GameHuman {
         winner = 0;
     }
 
-
+    /**
+     *
+     */
     void StartGame() {
         initializeBoard();
         window.newGame();
@@ -27,6 +29,9 @@ class GameHuman {
         BotTurn();
     }
 
+    /**
+     *
+     */
     private void BotTurn(){
         bot.play();
         nbMove++;
@@ -44,7 +49,11 @@ class GameHuman {
             window.canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
     }
 
-
+    /**
+     *
+     *
+     *
+     */
     private EventHandler<MouseEvent> eventHandler = new EventHandler<>() {
         @Override
         public void handle(MouseEvent e) {

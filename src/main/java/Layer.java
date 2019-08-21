@@ -51,7 +51,6 @@ class Layer {
                 s.append('\n');
             }
         }
-
         return s.toString();
     }
 

@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /**
  * The playing AI
  */
@@ -8,6 +6,7 @@ class Bot {
     private int playerNum;
     Window window;
     int board[];
+    private int subjectiveBoard[];
     boolean won;
 
     /*
@@ -18,11 +17,12 @@ class Bot {
      */
 
     Bot(Window window, int[] board, int playerNum) {
-        this.network = new Network(3);
+        this.network = new Network(5);
         this.playerNum = playerNum;
         this.window = window;
         this.board = board;
         won = false;
+        subjectiveBoard = new int[9];
     }
 
 
@@ -40,16 +40,38 @@ class Bot {
         double[] actions;
         int ind;
 
-        actions = network.computeOutput(board);
+        makeSubjectiveBoard();
 
-        //System.out.println("\n\n\n");
-        //for (double action : actions) System.out.println(action);
+        actions = network.computeOutput(subjectiveBoard);
 
         ind = Calculs.max(actions);
         while(window.chooseSquare(ind,playerNum) == -1){
             ind = Calculs.max(actions);
         }
     }
+
+    /**
+     * makeBoard allow the AI to converge because
+     * Bot is always player one on this board, and the enemy is
+     * number 2
+     *
+     *
+     */
+    private void makeSubjectiveBoard() {
+        if(playerNum == 1)
+            subjectiveBoard = board;
+        else{
+            for(int i = 0; i < board.length; i++) {
+                if (board[i] == 1)
+                    subjectiveBoard[i] = 2;
+                if (board[i] == 2)
+                    subjectiveBoard[i] = 1;
+                else
+                    subjectiveBoard[i] = board[i];
+            }
+        }
+    }
+
 
     /**
      * The bot won

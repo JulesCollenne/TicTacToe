@@ -19,6 +19,10 @@ class Game {
 
         initializeBoard();
         window.newGame();
+
+        p1.won = false;
+        p2.won = false;
+
         do {
             p1.play();
             nbMove++;
@@ -32,13 +36,12 @@ class Game {
 
         if (winner == 1)
             p1.won();
-        if (winner == 2)
+        else if (winner == 2)
             p2.won();
 
         System.out.println(winner + " won !");
 
         window.refresh();
-        System.out.println("Fin");
     }
 
     /**

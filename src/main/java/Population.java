@@ -44,26 +44,26 @@ class Population {
      * Make a new generation of Bots by crossing over the genes of the winner bots
      */
     void MakeNewGeneration(){
-        int i, botNum = size/2,newInd = 0;
+        int i,newInd = 0;
 
         Bot[] newGeneration = new Bot[size];
-
-        while(newInd < size/2) {
-            for (i = 0; i < size; i++) {
-                if (bots[i].won) {
-                    //System.out.println("i = " + i);
-                    newGeneration[newInd] = bots[i];
-                    newInd++;
-                }
+        for (i = 0; i < size; i++) {
+            if (bots[i].won) {
+                newGeneration[newInd] = bots[i];
+                newInd++;
             }
         }
 
-        for(i = 0; i < size/2; i+=2){
-            newGeneration[botNum] = Crossover(newGeneration[i],newGeneration[i+1]);
-            botNum++;
-            newGeneration[botNum] = Crossover(newGeneration[i],newGeneration[i+1]);
-            botNum++;
+        while(newInd < size) {
+            for (i = 0; newInd < size; i++) {
+                newGeneration[newInd] = Crossover(newGeneration[i], newGeneration[i + 1]);
+                newInd++;
+            }
         }
         bots = newGeneration;
+
+        for(i = 0; i < bots.length; i++){
+            bots[i].won = false;
+        }
     }
 }

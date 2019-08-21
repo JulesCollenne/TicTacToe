@@ -38,6 +38,7 @@ class Game {
         System.out.println(winner + " won !");
 
         window.refresh();
+        System.out.println("Fin");
     }
 
     /**

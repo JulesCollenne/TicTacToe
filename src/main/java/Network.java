@@ -14,8 +14,6 @@ class Network {
         this.layers = new Layer[nbLayer];
         int inputSize = 9;
 
-
-        //TODO modifier les tailles des matrices w si nécessaire
         layers[0] = new Layer(1, inputSize, inputSize, inputSize);
 
         for(int i = 1; i < nbLayer-1; i++){
@@ -25,14 +23,28 @@ class Network {
         layers[nbLayer-1] = new Layer(inputSize,1, inputSize,1);
     }
 
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        for(int i = 0; i < nbLayer; i++){
+            s.append("Layer ").append(i).append(" : \n");
+            s.append(layers[i].toString());
+            s.append('\n');
+        }
+
+        return s.toString();
+    }
+
     /**
      * Compute output of the network depending on input
      * @param rawInput entrée
      * @return output
      */
-    int computeOutput(int[] rawInput){
+    double[] computeOutput(int[] rawInput){
         double[][] input;
-        int action;
+        double[] actions;
 
         input = makeInput(rawInput);
 
@@ -41,8 +53,10 @@ class Network {
             layers[i+1].input = layers[i].compute(layers[i-1].output);
         }
         double[][] output = layers[nbLayer - 1].compute(layers[layers.length - 2].output);
-        action = chooseBest(output);
-        return action;
+
+        actions = makeOutput(output);
+
+        return actions;
     }
 
     /**
@@ -51,11 +65,29 @@ class Network {
      * @return the correct input of the good type
      */
     private double[][] makeInput(int[] rawInput){
-        double[][] input = new double[1][rawInput.length];
+        double[][] input = new double[rawInput.length][1];
 
         normalize(input);
 
         return input;
+    }
+
+    /**
+     *
+     * @param output
+     * @return
+     */
+    private double[] makeOutput(double[][] output){
+
+        if(output.length != 1 && output[0].length != 1)
+            throw new java.lang.Error("Output doesn't have the good shape !");
+
+        double[] actions = new double[9];
+
+        for(int i = 0; i < 9; i++){
+            actions[i] = output[i][0];
+        }
+        return actions;
     }
 
     /**
@@ -64,7 +96,7 @@ class Network {
      */
     private void normalize(double[][] input){
         for(int i = 0; i < input.length; i++)
-            for(int j = 0; j < input.length; j++)
+            for(int j = 0; j < input[0].length; j++)
             input[i][j] /= 2;
     }
 

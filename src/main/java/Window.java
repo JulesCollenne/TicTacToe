@@ -130,9 +130,6 @@ class Window {
 
 
 
-
-
-
     /**
      * Clear the current board and draw a clean board
      */

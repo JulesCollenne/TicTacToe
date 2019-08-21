@@ -30,7 +30,7 @@ class Population {
      * @param b1 first bot
      * @param b2 second bot
      */
-    private Bot Crossover(Bot b1, Bot b2){
+    Bot Crossover(Bot b1, Bot b2){
         Bot baby = new Bot(b1.window,b1.board,currentBaby);
         currentBaby = currentBaby == 1 ? 2 : 1;
 
@@ -51,6 +51,7 @@ class Population {
         while(newInd < size/2) {
             for (i = 0; i < size; i++) {
                 if (bots[i].won) {
+                    //System.out.println("i = " + i);
                     newGeneration[newInd] = bots[i];
                     newInd++;
                 }

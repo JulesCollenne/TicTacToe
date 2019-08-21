@@ -25,20 +25,29 @@ class Bot {
         won = false;
     }
 
+
+    @Override
+    public String toString() {
+        return network.toString();
+    }
+
     /**
      * Bot tries a move, if the move isn't correct,
      * it tries a random move until it does a correct
      * move
      */
     void play(){
-        int action;
+        double[] actions;
+        int ind;
 
-        Random random = new Random();
+        actions = network.computeOutput(board);
 
-        action = network.computeOutput(board);
+        //System.out.println("\n\n\n");
+        //for (double action : actions) System.out.println(action);
 
-        while(window.chooseSquare(action,playerNum) == -1){
-            action = random.nextInt(9);
+        ind = Calculs.max(actions);
+        while(window.chooseSquare(ind,playerNum) == -1){
+            ind = Calculs.max(actions);
         }
     }
 

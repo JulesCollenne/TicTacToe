@@ -12,7 +12,6 @@ class Layer {
     double[][] output;
 
     private double mutationRate = 0.25;
-    private double mutationStrength = 0.1;
 
     Layer(int nbLinesW,int nbColumnsW, int nbLinesB,int nbColumnsB){
         int i,j;
@@ -31,18 +30,38 @@ class Layer {
                 b0[i][j] = rand.nextDouble();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        s.append("\n");
+        s.append("w0 : \n");
+        for(int i = 0; i < w0.length; i++){
+            for(int j = 0; j < w0[0].length; j++) {
+                s.append(w0[i][j]);
+                s.append('\n');
+            }
+        }
+
+        s.append("\n");
+        s.append("b0 : \n");
+        for(int i = 0; i < b0.length; i++){
+            for(int j = 0; j < b0[0].length; j++) {
+                s.append(b0[i][j]);
+                s.append('\n');
+            }
+        }
+
+        return s.toString();
+    }
+
     /**
      * Compute the neural network of the layer
      * @param input input
      * @return output
      */
     double[][] compute(double[][] input){
-
-        output =  Calculs.matrixProduct(w0,input);
-        output =  Calculs.matrixAdd(output,b0);
-        output =  Activation.relu(output);
-        //output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0)); // TODO erreur ici : la matrice resultante devrait toujours etre de taille 1x9 mais des fois elle est 1x1 !
-        System.out.println(output.length + " " + output[0].length);
+        output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
         return output;
     }
 
@@ -68,18 +87,24 @@ class Layer {
         }
     }
 
+    /**
+     *
+     */
     void mutate() {
         int i,j;
+        double mutationStrength;
         Random rand = new Random();
 
         for(i = 0; i < w0.length; i++){
             for(j = 0; j < w0[0].length; j++){
+                mutationStrength = rand.nextDouble()*2 - 1;
                 w0[i][j] += rand.nextDouble() < mutationRate ? mutationStrength : 0;
             }
         }
 
         for(i = 0; i < b0.length; i++){
             for(j = 0; j < b0[0].length; j++){
+                mutationStrength = rand.nextDouble()*2 - 1;
                 b0[i][j] += rand.nextDouble() < mutationRate ? mutationStrength : 0;
             }
         }

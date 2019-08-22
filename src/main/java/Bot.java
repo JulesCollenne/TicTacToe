@@ -1,9 +1,11 @@
+import java.util.Arrays;
+
 /**
  * The playing AI
  */
 class Bot {
     Network network;
-    private int playerNum;
+    int playerNum;
     Window window;
     int board[];
     private int subjectiveBoard[];
@@ -17,7 +19,7 @@ class Bot {
      */
 
     Bot(Window window, int[] board, int playerNum) {
-        this.network = new Network(5);
+        this.network = new Network(10);
         this.playerNum = playerNum;
         this.window = window;
         this.board = board;
@@ -45,6 +47,9 @@ class Bot {
         actions = network.computeOutput(subjectiveBoard);
 
         ind = Calculs.max(actions);
+
+        System.out.println(Arrays.toString(actions));
+
         while(window.chooseSquare(ind,playerNum) == -1){
             ind = Calculs.max(actions);
         }
@@ -59,7 +64,7 @@ class Bot {
      */
     private void makeSubjectiveBoard() {
         if(playerNum == 1)
-            subjectiveBoard = board;
+            System.arraycopy(board, 0, subjectiveBoard, 0, board.length);
         else{
             for(int i = 0; i < board.length; i++) {
                 if (board[i] == 1)

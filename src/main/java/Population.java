@@ -1,3 +1,5 @@
+import java.util.Random;
+
 class Population {
     private Window window;
     int[] board;
@@ -35,7 +37,6 @@ class Population {
         currentBaby = currentBaby == 1 ? 2 : 1;
 
         baby.initializeGenes(b1,b2);
-        baby.mutate();
 
         return baby;
     }
@@ -54,16 +55,39 @@ class Population {
             }
         }
 
+        if(newInd == 1)
+            newGeneration[1] = new Bot(window,board,1);
+
         while(newInd < size) {
-            for (i = 0; newInd < size; i++) {
+            for (i = 0; newInd < size && i < newGeneration.length-1; i++) {
                 newGeneration[newInd] = Crossover(newGeneration[i], newGeneration[i + 1]);
                 newInd++;
             }
         }
         bots = newGeneration;
+        mixBots();
 
         for(i = 0; i < bots.length; i++){
             bots[i].won = false;
+            bots[i].mutate();
+        }
+    }
+
+
+    private void mixBots(){
+        Random rand = new Random();
+        int randNb;
+        Bot tmp;
+        for(int i = 0; i < bots.length; i++){
+            randNb = rand.nextInt(bots.length);
+            tmp = bots[i];
+            bots[i] = bots[randNb];
+            bots[randNb] = tmp;
+        }
+
+        for(int i = 0; i < bots.length-1; i += 2){
+            bots[i].playerNum = 1;
+            bots[i+1].playerNum = 2;
         }
     }
 }

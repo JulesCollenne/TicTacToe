@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Game {
     private int[] board;
     private Window window;
@@ -24,11 +26,13 @@ class Game {
         p2.won = false;
 
         do {
+            System.out.println(Arrays.toString(board));
             p1.play();
             nbMove++;
             winner = analyzeMove(nbMove);
             if (winner != 0)
                 break;
+            System.out.println(Arrays.toString(board));
             p2.play();
             nbMove++;
             winner = analyzeMove(nbMove);
@@ -38,6 +42,10 @@ class Game {
             p1.won();
         else if (winner == 2)
             p2.won();
+        else if( winner == -1){
+            p1.won();
+            p2.won();
+        }
 
         System.out.println(winner + " won !");
 

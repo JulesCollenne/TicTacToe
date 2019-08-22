@@ -1,6 +1,8 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
+
 /**
  * Run is the class that will run the program
  * Window will be created etc...
@@ -13,7 +15,7 @@ public class Run extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        int trainIter = 100;
+        int trainIter = 200;
         int board[] = new int[9];
 
         Window window = new Window(primaryStage,500,400, board);

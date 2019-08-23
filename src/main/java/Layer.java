@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -22,6 +23,7 @@ class Layer {
         b0 = new double[nbLinesB][nbColumnsB];
 
 
+        /*
         for(i = 0; i < nbLinesW; i++)
             for(j = 0; j < nbColumnsW; j++)
                 w0[i][j] = rand.nextDouble();
@@ -29,6 +31,7 @@ class Layer {
         for(i = 0; i < nbLinesB; i++)
             for(j = 0; j < nbColumnsB; j++)
                 b0[i][j] = rand.nextDouble();
+                */
 
     }
 
@@ -62,8 +65,8 @@ class Layer {
      * @return output
      */
     double[][] compute(double[][] input){
-        //output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
-        output =  Activation.sigmoid(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        //output =  Activation.sigmoid(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
         return output;
     }
 
@@ -73,7 +76,10 @@ class Layer {
      * @return output
      */
     double[][] computeLast(double[][] input){
-        output =  Activation.softmax(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        //System.out.println("Poids : " + Arrays.deepToString(input));
+        //output =  Activation.softmax(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        //System.out.println("Poids après : " + Arrays.deepToString(output));
+        output =  Activation.sigmoid(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
         return output;
     }
 
@@ -109,14 +115,14 @@ class Layer {
 
         for(i = 0; i < w0.length; i++){
             for(j = 0; j < w0[0].length; j++){
-                mutationStrength = rand.nextDouble() - 0.5;
+                mutationStrength = rand.nextDouble()/10 - 0.05;
                 w0[i][j] += rand.nextDouble() < mutationRate ? mutationStrength : 0;
             }
         }
 
         for(i = 0; i < b0.length; i++){
             for(j = 0; j < b0[0].length; j++){
-                mutationStrength = rand.nextDouble()*2 - 1;
+                mutationStrength = rand.nextDouble()/10 - 0.05;
                 b0[i][j] += rand.nextDouble() < mutationRate ? mutationStrength : 0;
             }
         }

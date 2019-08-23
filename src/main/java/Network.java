@@ -55,7 +55,7 @@ class Network {
             layers[i+1].input = layers[i].compute(layers[i-1].output);
         }
 
-        double[][] output = layers[nbLayer - 1].compute(layers[layers.length - 2].output);
+        double[][] output = layers[nbLayer - 1].computeLast(layers[layers.length - 2].output);
 
         //System.out.println(Arrays.deepToString(output));
 
@@ -102,7 +102,7 @@ class Network {
     private void normalize(double[][] input){
         for(int i = 0; i < input.length; i++)
             for(int j = 0; j < input[0].length; j++)
-            input[i][j] /= 2 - 1;
+            input[i][j] = input[i][j] / 2;
     }
 
     /**

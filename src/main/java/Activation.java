@@ -4,15 +4,18 @@ public class Activation {
 
     public static double[][] softmax(double[][] x){
         double sum = 0;
+
+        double[][] y = new double[x.length][x[0].length];
+
         for(int i = 0;i < x.length; i++)
             for (int j = 0; j < x[i].length; j++)
                 sum += Math.exp(x[i][j]);
 
         for(int i = 0; i < x.length; i++)
             for(int j = 0; j < x[i].length; j++)
-            x[i][j] /= sum;
+            y[i][j] /= sum;
 
-        return x;
+        return y;
     }
 
     static double relu(double x){

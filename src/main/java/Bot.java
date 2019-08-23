@@ -48,7 +48,7 @@ class Bot {
 
         ind = Calculs.max(actions);
 
-        System.out.println(Arrays.toString(actions));
+        //System.out.println(Arrays.toString(actions));
 
         while(window.chooseSquare(ind,playerNum) == -1){
             ind = Calculs.max(actions);

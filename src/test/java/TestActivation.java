@@ -44,4 +44,17 @@ public class TestActivation {
 
         System.out.println(Arrays.deepToString(result));
     }
+
+    @Test
+    public void sigmoid() {
+        double[][] result = new double[2][2];
+        result[0][0] = 1;
+        result[0][1] = 1;
+        result[1][0] = -0.5;
+        result[1][1] = 5;
+
+        result = Activation.sigmoid(result);
+
+        System.out.println(Arrays.deepToString(result));
+    }
 }

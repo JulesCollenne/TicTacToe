@@ -64,8 +64,10 @@ class Population {
                 newInd++;
             }
         }
+        System.out.println(bots[0].network.layers[0].w0[0][0]);
         bots = newGeneration;
         mixBots();
+        System.out.println(bots[0].network.layers[0].w0[0][0]);
 
         for(i = 0; i < bots.length; i++){
             bots[i].won = false;

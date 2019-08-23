@@ -48,7 +48,9 @@ class Network {
         double[][] input;
         double[] actions;
 
+        System.out.println(Arrays.toString(rawInput));
         input = makeInput(rawInput);
+        System.out.println(Arrays.deepToString(input));
 
         layers[1].input = layers[0].compute(input);
         for(int i=1;i<layers.length-1;i++){
@@ -71,6 +73,9 @@ class Network {
      */
     private double[][] makeInput(int[] rawInput){
         double[][] input = new double[rawInput.length][1];
+
+        for(int i = 0; i < rawInput.length; i++)
+            input[i][0] = rawInput[i];
 
         normalize(input);
 

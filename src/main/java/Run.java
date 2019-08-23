@@ -15,13 +15,13 @@ public class Run extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        int trainIter = 200;
+        int trainIter = 1000;
         int board[] = new int[9];
 
         Window window = new Window(primaryStage,500,400, board);
         window.initialize();
 
-        Population population = new Population(20,window,board);
+        Population population = new Population(100,window,board);
 
         Game game;
 
@@ -31,6 +31,7 @@ public class Run extends Application {
                 game.StartGame();
             }
             population.MakeNewGeneration();
+            System.out.println((int)((double)(i+1)/(double)trainIter * 100.) + "%");
         }
 
         Files files = new Files();

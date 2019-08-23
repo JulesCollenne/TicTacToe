@@ -19,7 +19,7 @@ class Bot {
      */
 
     Bot(Window window, int[] board, int playerNum) {
-        this.network = new Network(10);
+        this.network = new Network(5);
         this.playerNum = playerNum;
         this.window = window;
         this.board = board;

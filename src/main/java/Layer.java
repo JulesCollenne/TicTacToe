@@ -23,15 +23,15 @@ class Layer {
         b0 = new double[nbLinesB][nbColumnsB];
 
 
-        /*
+
         for(i = 0; i < nbLinesW; i++)
             for(j = 0; j < nbColumnsW; j++)
-                w0[i][j] = rand.nextDouble();
+                w0[i][j] = rand.nextDouble()/10 - 0.05;
 
         for(i = 0; i < nbLinesB; i++)
             for(j = 0; j < nbColumnsB; j++)
-                b0[i][j] = rand.nextDouble();
-                */
+                b0[i][j] = rand.nextDouble()/10 - 0.05;
+
 
     }
 
@@ -65,8 +65,8 @@ class Layer {
      * @return output
      */
     double[][] compute(double[][] input){
-        output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
-        //output =  Activation.sigmoid(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        //output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        output =  Activation.sigmoid(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
         return output;
     }
 

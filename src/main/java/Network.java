@@ -15,14 +15,15 @@ class Network {
         this.nbLayer = nbLayer;
         this.layers = new Layer[nbLayer];
         int inputSize = 9;
+        int hiddenSize = 15;
 
-        layers[0] = new Layer(1, inputSize, inputSize, inputSize);
+        layers[0] = new Layer(1, hiddenSize, inputSize, hiddenSize);
 
         for(int i = 1; i < nbLayer-1; i++){
-            layers[i] = new Layer(inputSize, inputSize, inputSize, inputSize);
+            layers[i] = new Layer(hiddenSize, hiddenSize, inputSize, hiddenSize);
         }
 
-        layers[nbLayer-1] = new Layer(inputSize,1, inputSize,1);
+        layers[nbLayer-1] = new Layer(hiddenSize,1, inputSize,1);
     }
 
 
@@ -48,11 +49,11 @@ class Network {
         double[][] input;
         double[] actions;
 
-        System.out.println(Arrays.toString(rawInput));
         input = makeInput(rawInput);
-        System.out.println(Arrays.deepToString(input));
 
+        //System.out.println(Arrays.deepToString(input));
         layers[1].input = layers[0].compute(input);
+
         for(int i=1;i<layers.length-1;i++){
             layers[i+1].input = layers[i].compute(layers[i-1].output);
         }
@@ -107,12 +108,12 @@ class Network {
     private void normalize(double[][] input){
         for(int i = 0; i < input.length; i++)
             for(int j = 0; j < input[0].length; j++)
-            input[i][j] = input[i][j] / 2;
+                input[i][j] = input[i][j] * 10;
     }
 
     /**
      * Take the best move ( higher score )
-     * @param output outpute of the neural network
+     * @param output output of the neural network
      * @return maximum ind, the bets move found
      */
     private int chooseBest(double[][] output){

@@ -9,7 +9,7 @@ class Calculs {
     static double[][] matrixProduct(double A[][], double B[][]){
 
         if(A.length != B[0].length)
-            throw new java.lang.Error("Matrix sizes are not good !");
+            throw new java.lang.Error("Matrix sizes are not good !" + A.length + " != " + B[0].length);
 
         double C[][] = new double[B.length][A[0].length];
 
@@ -41,7 +41,6 @@ class Calculs {
                 y[i][j] = A[i][j] + B[i][j];
             }
         }
-
         return y;
     }
 

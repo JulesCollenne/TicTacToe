@@ -21,7 +21,7 @@ public class Run extends Application {
         Window window = new Window(primaryStage,500,400, board);
         window.initialize();
 
-        Population population = new Population(100,window,board);
+        Population population = new Population(50,window,board);
 
         Game game;
 

@@ -12,7 +12,7 @@ class Layer {
 
     double[][] output;
 
-    private double mutationRate = 0.2;
+    private double mutationRate = 0.05;
 
     Layer(int nbLinesW,int nbColumnsW, int nbLinesB,int nbColumnsB){
         int i,j;
@@ -26,11 +26,12 @@ class Layer {
 
         for(i = 0; i < nbLinesW; i++)
             for(j = 0; j < nbColumnsW; j++)
-                w0[i][j] = rand.nextDouble()/10 - 0.05;
+                w0[i][j] = rand.nextDouble()*2 - 1;
+
 
         for(i = 0; i < nbLinesB; i++)
             for(j = 0; j < nbColumnsB; j++)
-                b0[i][j] = rand.nextDouble()/10 - 0.05;
+                b0[i][j] = rand.nextDouble()*2 - 1;
 
 
     }
@@ -65,8 +66,8 @@ class Layer {
      * @return output
      */
     double[][] compute(double[][] input){
-        //output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
-        output =  Activation.sigmoid(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        output =  Activation.relu(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
+        //output =  Activation.sigmoid(Calculs.matrixAdd(Calculs.matrixProduct(w0,input),b0));
         return output;
     }
 
@@ -98,6 +99,7 @@ class Layer {
             }
         }
 
+
         for(i = 0; i < b0.length; i++){
             for(j = 0; j < b0[0].length; j++){
                 b0[i][j] = rand.nextDouble() < 0.5 ? l1.b0[i][j] : l2.b0[i][j];
@@ -119,6 +121,7 @@ class Layer {
                 w0[i][j] += rand.nextDouble() < mutationRate ? mutationStrength : 0;
             }
         }
+
 
         for(i = 0; i < b0.length; i++){
             for(j = 0; j < b0[0].length; j++){

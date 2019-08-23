@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * The playing AI
@@ -10,6 +11,7 @@ class Bot {
     int board[];
     private int subjectiveBoard[];
     boolean won;
+    int nbWin;
 
     /*
 
@@ -19,12 +21,13 @@ class Bot {
      */
 
     Bot(Window window, int[] board, int playerNum) {
-        this.network = new Network(5);
+        this.network = new Network(10);
         this.playerNum = playerNum;
         this.window = window;
         this.board = board;
         won = false;
         subjectiveBoard = new int[9];
+        nbWin = 0;
     }
 
 
@@ -42,6 +45,8 @@ class Bot {
         double[] actions;
         int ind;
 
+        Random rand = new Random();
+
         makeSubjectiveBoard();
 
         actions = network.computeOutput(subjectiveBoard);
@@ -49,9 +54,13 @@ class Bot {
         ind = Calculs.max(actions);
 
         //System.out.println(Arrays.toString(actions));
-
+/*
         while(window.chooseSquare(ind,playerNum) == -1){
             ind = Calculs.max(actions);
+        }*/
+
+        while(window.chooseSquare(ind,playerNum) == -1){
+            ind = rand.nextInt(9);
         }
     }
 
@@ -83,6 +92,7 @@ class Bot {
      */
     void won(){
         won = true;
+        nbWin++;
     }
 
     void initializeGenes(Bot b1, Bot b2){

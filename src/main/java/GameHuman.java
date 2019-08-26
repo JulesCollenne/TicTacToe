@@ -25,6 +25,7 @@ class GameHuman {
     void StartGame() {
         initializeBoard();
         window.newGame();
+        bot.playerNum = 1;
 
         BotTurn();
     }
@@ -34,6 +35,7 @@ class GameHuman {
      */
     private void BotTurn(){
         bot.play();
+        //printBoard();
         nbMove++;
         winner = analyzeMove(nbMove);
         if (winner == 1) {
@@ -47,6 +49,15 @@ class GameHuman {
         }
         else
             window.canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+    }
+
+    private void printBoard(){
+        System.out.println("______");
+        System.out.println(board[0] + "|" +  board[1] + "|" + board[2]);
+        System.out.println(board[3] + "|" +  board[4] + "|" + board[5]);
+        System.out.println(board[6] + "|" +  board[7] + "|" + board[8]);
+        System.out.println("______");
+        System.out.println();
     }
 
     /**
@@ -63,6 +74,7 @@ class GameHuman {
             if (window.chooseSquare(action, player.playerNum) == -1)
                 return;
 
+            //printBoard();
             nbMove++;
             winner = analyzeMove(nbMove);
 

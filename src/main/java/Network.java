@@ -15,7 +15,7 @@ class Network {
         this.nbLayer = nbLayer;
         this.layers = new Layer[nbLayer];
         int inputSize = 9;
-        int hiddenSize = 15;
+        int hiddenSize = 9;
 
         layers[0] = new Layer(1, hiddenSize, inputSize, hiddenSize);
 
@@ -107,8 +107,12 @@ class Network {
      */
     private void normalize(double[][] input){
         for(int i = 0; i < input.length; i++)
-            for(int j = 0; j < input[0].length; j++)
-                input[i][j] = input[i][j] * 10;
+            for(int j = 0; j < input[0].length; j++) {
+                if (input[i][j] == 1)
+                    input[i][j] = 1.;
+                if (input[i][j] == 2)
+                    input[i][j] = -1.;
+            }
     }
 
     /**

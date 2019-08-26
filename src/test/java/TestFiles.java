@@ -11,7 +11,7 @@ public class TestFiles extends Application {
         int board[] = new int[9];
 
         Window window = new Window(primaryStage,500,400, board);
-        Bot bot = new Bot(window, board,1);
+        Bot bot = new Bot(window, board);
 
         testWrite(bot);
         //testRead(bot);

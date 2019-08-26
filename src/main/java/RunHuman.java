@@ -21,7 +21,7 @@ public class RunHuman extends Application {
         GameHuman game;
         Files files = new Files();
 
-        Bot bot = new Bot(window,board,1);
+        Bot bot = new Bot(window,board);
         Player player = new Player(2);
 
         files.loadWeights(bot);

@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -12,7 +11,7 @@ class Layer {
 
     double[][] output;
 
-    private double mutationRate = 0.05;
+    private double mutationRate = 0.1;
 
     Layer(int nbLinesW,int nbColumnsW, int nbLinesB,int nbColumnsB){
         int i,j;
@@ -117,7 +116,7 @@ class Layer {
 
         for(i = 0; i < w0.length; i++){
             for(j = 0; j < w0[0].length; j++){
-                mutationStrength = rand.nextDouble()/10 - 0.05;
+                mutationStrength = rand.nextDouble() - 0.5;
                 w0[i][j] += rand.nextDouble() < mutationRate ? mutationStrength : 0;
             }
         }
@@ -125,7 +124,7 @@ class Layer {
 
         for(i = 0; i < b0.length; i++){
             for(j = 0; j < b0[0].length; j++){
-                mutationStrength = rand.nextDouble()/10 - 0.05;
+                mutationStrength = rand.nextDouble() - 0.5;
                 b0[i][j] += rand.nextDouble() < mutationRate ? mutationStrength : 0;
             }
         }

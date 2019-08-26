@@ -9,8 +9,8 @@ public class TestPopulation extends Application {
         int board[] = new int[9];
 
         Window window = new Window(primaryStage,500,400, board);
-        Bot b1 = new Bot(window, board,1);
-        Bot b2 = new Bot(window, board,2);
+        Bot b1 = new Bot(window, board);
+        Bot b2 = new Bot(window, board);
 
         Population population = new Population(10,window,board);
 

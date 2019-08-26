@@ -2,7 +2,14 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * The playing AI
+ * The playing AI Bot
+ *
+ * The bot has a score that goes up if it plays well
+ *
+ *      |  First player | Second player
+ * Win  |    +7         |      +10
+ * Draw |    +3         |      +5
+ * Lose |    0          |      0
  */
 class Bot {
     Network network;
@@ -11,7 +18,8 @@ class Bot {
     int board[];
     private int subjectiveBoard[];
     boolean won;
-    int nbWin;
+    int score;
+    boolean disqualified;
 
     /*
 
@@ -20,14 +28,14 @@ class Bot {
              7 | 8 | 9
      */
 
-    Bot(Window window, int[] board, int playerNum) {
-        this.network = new Network(10);
-        this.playerNum = playerNum;
+    Bot(Window window, int[] board) {
+        this.network = new Network(3);
         this.window = window;
         this.board = board;
         won = false;
         subjectiveBoard = new int[9];
-        nbWin = 0;
+        score = 0;
+        disqualified = false;
     }
 
 
@@ -54,14 +62,18 @@ class Bot {
         ind = Calculs.max(actions);
 
         //System.out.println(Arrays.toString(actions));
-/*
-        while(window.chooseSquare(ind,playerNum) == -1){
-            ind = Calculs.max(actions);
-        }*/
 
         while(window.chooseSquare(ind,playerNum) == -1){
-            ind = rand.nextInt(9);
+            ind = Calculs.max(actions);
         }
+
+        //if(window.chooseSquare(ind,playerNum) == -1)
+            //disqualified = true;
+
+/*
+        while(window.chooseSquare(ind,playerNum) == -1){
+            ind = rand.nextInt(9);
+        }*/
     }
 
     /**
@@ -92,7 +104,21 @@ class Bot {
      */
     void won(){
         won = true;
-        nbWin++;
+        if(playerNum == 1)
+            score += 7;
+        else
+            score += 10;
+    }
+
+    /**
+     * The bots drew
+     */
+    void drew(){
+        won = false;
+        if(playerNum == 1)
+            score += 3;
+        else
+            score += 5;
     }
 
     void initializeGenes(Bot b1, Bot b2){

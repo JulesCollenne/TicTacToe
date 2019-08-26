@@ -1,73 +1,67 @@
-import java.util.Arrays;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
-class Game {
+public class GameBotSpectate {
     private int[] board;
     private Window window;
-    private Bot p1;
-    private Bot p2;
+    private Bot bot;
+    private Bot bot2;
+    private Player player;
+    private int nbMove;
+    private int winner;
 
-    Game(Window window, int[] board, Bot p1, Bot p2) {
-        this.board = board;
+    GameBotSpectate(Window window, int[] board, Bot bot, Bot bot2){
         this.window = window;
-        this.p1 = p1;
-        this.p2 = p2;
+        this.board = board;
+        this.bot = bot;
+        this.bot2 = bot2;
+        nbMove = 0;
+        winner = 0;
     }
 
     /**
-     * Here is the general function of a game
+     *
      */
     void StartGame() {
-        int winner = 0, nbMove = 0;
-
         initializeBoard();
         window.newGame();
+        bot.playerNum = 1;
 
-        p1.won = false;
-        p2.won = false;
+        BotTurn();
+    }
 
-        p1.playerNum = 1;
-        p2.playerNum = 2;
-
-        do {
-            p1.play();
-            if (p1.disqualified)
-                break;
-            //printBoard();
-            nbMove++;
-            winner = analyzeMove(nbMove);
-            if (winner != 0)
-                break;
-            p2.play();
-            if (p2.disqualified)
-                break;
-            //printBoard();
-            nbMove++;
-            winner = analyzeMove(nbMove);
-        } while (winner == 0);
-
-        if (winner == 1 || p2.disqualified)
-            p1.won();
-        else if (winner == 2 || p1.disqualified)
-            p2.won();
-        else if( winner == -1){
-            p1.drew();
-            p2.drew();
+    /**
+     *
+     */
+    private void BotTurn(){
+        bot.play();
+        nbMove++;
+        winner = analyzeMove(nbMove);
+        if (winner == 1) {
+            bot.won();
+            System.out.println("Bot won !");
+            window.canvas.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
         }
-
-        //System.out.println(winner + " won !");
-
-        window.refresh();
+        else if (winner == -1){
+            System.out.println("Draw !");
+            window.canvas.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+        }
+        else
+            window.canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
     }
 
+    /**
+     *
+     *
+     *
+     */
+    private EventHandler<MouseEvent> eventHandler = new EventHandler<>() {
+        @Override
+        public void handle(MouseEvent e) {
+            BotTurn();
+        }
+    };
 
-    private void printBoard(){
-        System.out.println("______");
-        System.out.println(board[0] + "|" +  board[1] + "|" + board[2]);
-        System.out.println(board[3] + "|" +  board[4] + "|" + board[5]);
-        System.out.println(board[6] + "|" +  board[7] + "|" + board[8]);
-        System.out.println("______");
-        System.out.println();
-    }
 
     /**
      * @param nbMove the number of move that happened until now
@@ -141,4 +135,3 @@ class Game {
             board[i] = 0;
     }
 }
-

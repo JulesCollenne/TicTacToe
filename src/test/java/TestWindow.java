@@ -12,7 +12,7 @@ public class TestWindow extends Application {
             int board[] = new int[9];
 
             Window window = new Window(primaryStage,500,400, board);
-            Bot bot = new Bot(window, board,1);
+            Bot bot = new Bot(window, board);
 
             for(int i=0;i<9;i++)
                 board[i] = 1;

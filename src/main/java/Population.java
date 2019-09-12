@@ -40,44 +40,58 @@ class Population {
      * Make a new generation of Bots by crossing over the genes of the winner bots
      */
     void MakeNewGeneration(){
-        int i;
 
-        int selection = 4;
+        if(bots[1] == null)
+            throw new Error("Only one bot alive !");
 
-        Bot[] newGeneration = new Bot[size];
+        int selection = 6;
 
         rankByScore();
 
-        for (i = 0; i < size/selection; i++)
-                newGeneration[i] = bots[i];
+        bots = truncationSelection(selection);
+        //mixBots();
 
-        if(newGeneration[1] == null)
-            throw new Error("Only one bot alive !");
+        initializeBots();
+    }
+
+    private Bot[] truncationSelection(int selection){
+        Bot[] newGeneration = new Bot[size];
+
+        if (size / selection >= 0) System.arraycopy(bots, 0, newGeneration, 0, size / selection);
 
         int newInd = size/selection;
 
         while(newInd < size) {
-            for (i = 0; newInd < size && i < newGeneration.length-1; i++) {
+            for (int i = 0; newInd < size && i < newGeneration.length-1; i++) {
                 newGeneration[newInd] = Crossover(newGeneration[i], newGeneration[i + 1]);
                 newInd++;
             }
         }
+        return newGeneration;
+    }
 
-        bots = newGeneration;
-        //mixBots();
+    private void rouletteWheel(int selection){
+        Bot[] newGeneration = new Bot[size];
 
-        for(i = 0; i < bots.length; i++){
-            bots[i].won = false;
-            bots[i].score = 0;
-            bots[i].mutate();
-            bots[i].disqualified = false;
+        int ind = 0;
+        double chance = 0.;
+
+        for(int i = 0; i < bots.length; i++){
+            chance = 1. / i;
+            newGeneration[ind] = bots[i]; //TODO
+        }
+
+        //return newGeneration;
+    }
+
+    private void initializeBots(){
+        for (Bot bot : bots) {
+            bot.won = false;
+            bot.score = 0;
+            bot.mutate();
+            bot.disqualified = false;
         }
     }
-
-    private void rouletteWheel(){
-
-    }
-
 
     /**
      * Rank the bots in bots[] by score
@@ -115,4 +129,19 @@ class Population {
             bots[randNb] = tmp;
         }
     }
+
+
+    /**
+     * Return average score of the population
+     */
+    double averageScore(){
+        double sum = 0;
+
+        for(int i = 0; i < size; i++)
+            sum += bots[i].score;
+
+        return sum / Calculs.sommeFact(size);
+    }
+
+
 }

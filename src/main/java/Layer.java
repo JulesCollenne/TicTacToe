@@ -11,7 +11,7 @@ class Layer {
 
     double[][] output;
 
-    private double mutationRate = 0.1;
+    private double mutationRate = 0.001;
 
     Layer(int nbLinesW,int nbColumnsW, int nbLinesB,int nbColumnsB){
         int i,j;
@@ -94,14 +94,14 @@ class Layer {
 
         for(i = 0; i < w0.length; i++){
             for(j = 0; j < w0[0].length; j++){
-                w0[i][j] = rand.nextDouble() < 0.5 ? l1.w0[i][j] : l2.w0[i][j];
+                w0[i][j] = rand.nextDouble() < 0.9999 ? l1.w0[i][j] : l2.w0[i][j];
             }
         }
 
 
         for(i = 0; i < b0.length; i++){
             for(j = 0; j < b0[0].length; j++){
-                b0[i][j] = rand.nextDouble() < 0.5 ? l1.b0[i][j] : l2.b0[i][j];
+                b0[i][j] = rand.nextDouble() < 0.9999 ? l1.b0[i][j] : l2.b0[i][j];
             }
         }
     }

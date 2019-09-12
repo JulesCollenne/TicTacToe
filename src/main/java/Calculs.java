@@ -44,6 +44,11 @@ class Calculs {
         return y;
     }
 
+    /**
+     * Max
+     * @param array liste
+     * @return indice max
+     */
     static int max(double[] array){
         int maxInd = 0;
         double max = -9999;
@@ -57,4 +62,12 @@ class Calculs {
         array[maxInd] = -9999;
         return maxInd;
     }
+
+    static double sommeFact(double n){
+        double sum = 0;
+        for(int i = 1; i < n; i++)
+            sum += n - i;
+        return sum;
+    }
+
 }

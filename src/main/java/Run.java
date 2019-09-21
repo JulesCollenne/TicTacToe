@@ -13,13 +13,13 @@ public class Run extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        int trainIter = 500;
+        int trainIter = 50;
         int board[] = new int[9];
 
         Window window = new Window(primaryStage,500,400, board);
         window.initialize();
 
-        Population population = new Population(50,window,board);
+        Population population = new Population(300,window,board);
 
         Game game;
 

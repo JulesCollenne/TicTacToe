@@ -84,11 +84,15 @@ class Population {
         //return newGeneration;
     }
 
+
+    /**
+     * Initialize bots, including mutation
+     */
     private void initializeBots(){
         for (Bot bot : bots) {
             bot.won = false;
             bot.score = 0;
-            bot.mutate();
+            //bot.mutate();
             bot.disqualified = false;
         }
     }
